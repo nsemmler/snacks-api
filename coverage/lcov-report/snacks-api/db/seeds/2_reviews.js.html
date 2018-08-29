@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for snacks-api/db/seeds/2_reviews.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">snacks-api/db/seeds</a> 2_reviews.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>3/3</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>3/3</span>
+      </div>
+    </div>
+    <p class="quiet">
+      Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+    </p>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">exports.seed = function(knex, Promise) {
+  // Inserts sample reviews
+  return knex('reviews').insert([
+    { id: 1, title: "Incredible!", text: "If it were a person I'd say to it: Is your name Dan Druff? You get into people's hair. I mean like, I'd say that you're funny but looks aren't everything.", rating: 1, snack_id: 1 },
+    { id: 2, title: "Tasty!", text: "If it were a person I'd say to this snack: I appreciate all of your opinions. I mean like, You have ten of the best fingers I have ever seen!", rating: 3, snack_id: 2 },
+    { id: 3, title: "Tasty!", text: "If it were a person I'd say to it: Learn from your parents' mistakes - use birth control! I mean like, I thought of you all day today. I was at the zoo.", rating: 2, snack_id: 3 },
+    { id: 4, title: "Refined!", text: "If it were a person I'd say to this snack: I would share my dessert with you. I mean like, You are a champ!", rating: 5, snack_id: 4 },
+    { id: 5, title: "Ergonomic!", text: "If it were a person I'd say to it: It looks like your face caught on fire and someone tried to put it out with a hammer. I mean like, You're so fat your belly button has an echo echo echo...", rating: 1, snack_id: 5 },
+    { id: 6, title: "Refined!", text: "If it were a person I'd say to this snack: We would enjoy a cookout with you! I mean like, You are the rare catalyst to my volatile compound.", rating: 4, snack_id: 6 },
+    { id: 7, title: "Small!", text: "If it were a person I'd say to it: You're so fat your shadow casts a shadow. I mean like, You may not be the best looking girl here, but beauty is only a light switch away!", rating: 2, snack_id: 7 },
+    { id: 8, title: "Intelligent!", text: "If it were a person I'd say to this snack: There isn't a thing about you that I don't like. I mean like, You will still be beautiful when you get older.", rating: 2, snack_id: 8 },
+    { id: 9, title: "Practical!", text: "If it were a person I'd say to it: You're so dumb, your dog teaches you tricks. I mean like, I don't exactly hate you, but if you were on fire and I had water, I'd drink it.", rating: 2, snack_id: 9 },
+    { id: 10, title: "Ergonomic!", text: "If it were a person I'd say to this snack: You are the gravy to my mashed potatoes. I mean like, Will you sign my yearbook?", rating: 5, snack_id: 10 },
+    { id: 11, title: "Incredible!", text: "If it were a person I'd say to it: You are proof that evolution CAN go in reverse. I mean like, Even if you were twice as smart, you'd still be stupid!", rating: 2, snack_id: 11 },
+    { id: 12, title: "Ergonomic!", text: "If it were a person I'd say to this snack: You make babies smile. I mean like, You're so rad.", rating: 3, snack_id: 12 },
+    { id: 13, title: "Fantastic!", text: "If it were a person I'd say to it: Your ears are so big when you stand on a mountain they look like trophy handles. I mean like, I wish you no harm, but it would have been much better if you had never lived.", rating: 1, snack_id: 13 },
+    { id: 14, title: "Refined!", text: "If it were a person I'd say to this snack: I would enjoy a roadtrip with you. I mean like, You have very smooth hair.", rating: 5, snack_id: 14 },
+    { id: 15, title: "Tasty!", text: "If it were a person I'd say to it: Shut up, you'll never be the man your mother is. I mean like, Ever since I saw you in your family tree, I've wanted to cut it down.", rating: 2, snack_id: 15 },
+    { id: 16, title: "Licensed!", text: "If it were a person I'd say to this snack: Don't worry. You'll do great. I mean like, Don't worry about procrastinating on your studies, I know you'll do great!", rating: 7, snack_id: 16 },
+    { id: 17, title: "Awesome!", text: "If it were a person I'd say to it: Nice tan, orange is my favorite color. I mean like, Somewhere out there is a tree, tirelessly producing oxygen so you can breathe. I think you owe it an apology.", rating: 2, snack_id: 17 },
+    { id: 18, title: "Practical!", text: "If it were a person I'd say to this snack: Your skin is radiant. I mean like, You look so perfect.", rating: 5, snack_id: 18 },
+    { id: 19, title: "Generic!", text: "If it were a person I'd say to it: What are you doing here? Did someone leave your cage open? I mean like, You're so ugly, when you popped out the doctor said \"Aww what a treasure\" and your mom said \"Yeah, lets bury it.\"", rating: 1, snack_id: 19 },
+    { id: 20, title: "Fantastic!", text: "If it were a person I'd say to this snack: I like those shoes more than mine. I mean like, You're nicer than a day on the beach.", rating: 4, snack_id: 20 },
+    { id: 21, title: "Small!", text: "If it were a person I'd say to it: It's better to keep your mouth shut and give the 'impression' that you're stupid than to open it and remove all doubt. I mean like, You are proof that God has a sense of humor.", rating: 2, snack_id: 21 },
+    { id: 22, title: "Small!", text: "If it were a person I'd say to this snack: I heard you make really good French Toast. I mean like, I'd wake up for an 8 a.m. class just so I could sit next to you.", rating: 5, snack_id: 22 },
+    { id: 23, title: "Incredible!", text: "If it were a person I'd say to it: If what you don't know can't hurt you, you're invulnerable. I mean like, Are you always an idiot, or just when I'm around?", rating: 1, snack_id: 23 },
+    { id: 24, title: "Sleek!", text: "If it were a person I'd say to this snack: I would do your taxes any day. I mean like, You deserve a promotion.", rating: 4, snack_id: 24 },
+    { id: 25, title: "Handmade!", text: "If it were a person I'd say to it: The best part of you is still running down your old mans leg. I mean like, I was pro life before I met you.", rating: 2, snack_id: 25 },
+    { id: 26, title: "Rustic!", text: "If it were a person I'd say to this snack: Take a break; you've earned it. I mean like, I don't speak much English, but with you all I really need to say is beautiful.", rating: 4, snack_id: 26 },
+    { id: 27, title: "Tasty!", text: "If it were a person I'd say to it: Keep talking, someday you'll say something intelligent! I mean like, Your dad's condom is a bigger than your personality.", rating: 1, snack_id: 27 },
+    { id: 28, title: "Gorgeous!", text: "If it were a person I'd say to this snack: I heard you make really good French Toast. I mean like, I love what you've done with the place.", rating: 5, snack_id: 28 },
+    { id: 29, title: "Fantastic!", text: "If it were a person I'd say to it: I could eat a bowl of alphabet soup and shit out a smarter statement than that. I mean like, It's kinda sad watching you attempt to fit your entire vocabulary into a sentence.", rating: 1, snack_id: 29 },
+    { id: 30, title: "Handmade!", text: "If it were a person I'd say to this snack: Treat yourself to another compliment! I mean like, You smell nice.", rating: 5, snack_id: 30 },
+    { id: 31, title: "Gorgeous!", text: "If it were a person I'd say to it: If brains were dynamite you wouldn't have enough to blow your nose. I mean like, You do realize makeup isn't going to fix your stupidity?", rating: 2, snack_id: 31 },
+    { id: 32, title: "Tasty", text: "If it were a person I'd say to it: What are you going to do for a face when the baboon wants his butt back? I mean like, You are depriving some poor village of its idiot.", rating: 2, snack_id: 1 },
+    { id: 33, title: "Practical", text: "If it were a person I'd say to this snack: Shall I compare thee to a summer's day?  Thou art more lovely and more temperate. I mean like, Your body fat percentage is perfectly suited for your height.", rating: 4, snack_id: 2 },
+    { id: 34, title: "Awesome", text: "If it were a person I'd say to it: If I wanted to hear from an asshole, I'd fart. I mean like, I heard you went to a haunted house and they offered you a job.", rating: 1, snack_id: 3 },
+    { id: 35, title: "Small", text: "If it were a person I'd say to this snack: You and Chuck Norris are on equal levels. I mean like, You make the gloomy days a little less gloomy.", rating: 3, snack_id: 4 },
+    { id: 36, title: "Small", text: "If it were a person I'd say to it: I was pro life before I met you. I mean like, You're as useful as an ashtray on a motorcycle.", rating: 1, snack_id: 5 },
+    { id: 37, title: "Licensed", text: "If it were a person I'd say to this snack: You look great in this or any other light. I mean like, Your cooking reminds me of my mother's.", rating: 4, snack_id: 6 },
+    { id: 38, title: "Gorgeous", text: "If it were a person I'd say to it: You're so ugly, the only dates you get are on a calendar. I mean like, A sharp tongue is no indication of a keen mind.", rating: 1, snack_id: 7 },
+    { id: 39, title: "Sleek", text: "If it were a person I'd say to this snack: &lt;3 I mean like, You're more cuddly than the Downy Bear.", rating: 4, snack_id: 8 },
+    { id: 40, title: "Licensed", text: "If it were a person I'd say to it: You must have a Teflon brain, because nothing sticks. I mean like, Your ambition outweighs your relevant skills.", rating: 2, snack_id: 9 },
+    { id: 41, title: "Rustic", text: "If it were a person I'd say to this snack: I like your socks. I mean like, You're real happening in a far out way.", rating: 4, snack_id: 10 },
+    { id: 42, title: "Unbranded", text: "If it were a person I'd say to it: You have the perfect face for radio. I mean like, Why don't you slip into something more comfortable -- like a coma.", rating: 1, snack_id: 11 },
+    { id: 43, title: "Unbranded", text: "If it were a person I'd say to this snack: If we were playing kickball, I'd pick you first. I mean like, I like your pants.", rating: 5, snack_id: 12 },
+    { id: 44, title: "Tasty", text: "If it were a person I'd say to it: You prefer three left turns to one right turn. I mean like, You're so ugly you have to trick or treat over the phone.", rating: 2, snack_id: 13 },
+    { id: 45, title: "Handmade", text: "If it were a person I'd say to this snack: Your eyebrows really make your pretty eyes stand out. I mean like, You listen to the coolest music.", rating: 5, snack_id: 14 },
+    { id: 46, title: "Gorgeous", text: "If it were a person I'd say to it: Your breath is so stinky, we look forward to your farts. I mean like, You must have a very low opinion of people if you think they are your equals.", rating: 2, snack_id: 15 },
+    { id: 47, title: "Gorgeous", text: "If it were a person I'd say to this snack: If you were around, I would enjoy doing my taxes. I mean like, You're nicer than a day on the beach.", rating: 4, snack_id: 16 },
+    { id: 48, title: "Rustic", text: "If it were a person I'd say to it: For those who never forget a face, you are an exception. I mean like, It's hard to get the big picture when you have such a small screen.", rating: 1, snack_id: 17 },
+    { id: 49, title: "Practical", text: "If it were a person I'd say to this snack: You are the star of my daydreams. I mean like, You're sweeter than than a bucket of bon-bons!", rating: 5, snack_id: 18 },
+    { id: 50, title: "Refined", text: "If it were a person I'd say to it: You look like a before picture. I mean like, You do realize makeup isn't going to fix your stupidity?", rating: 2, snack_id: 19 },
+    { id: 51, title: "Rustic", text: "If it were a person I'd say to this snack: Well done! I mean like, You would look good in glasses OR contacts.", rating: 5, snack_id: 20 },
+    { id: 52, title: "Handcrafted", text: "If it were a person I'd say to it: Why don't you check eBay and see if they have a life for sale. I mean like, Just reminding u there is a very fine line between hobby and mental illness.", rating: 2, snack_id: 21 },
+    { id: 53, title: "Intelligent", text: "If it were a person I'd say to this snack: You're the bee's knees. I mean like, Your feet are perfect size!", rating: 1, snack_id: 22 },
+    { id: 54, title: "Handcrafted", text: "If it were a person I'd say to it: Any similarity between you and a human is purely coincidental. I mean like, If ignorance is bliss, you must be the happiest person on earth.", rating: 1, snack_id: 23 },
+    { id: 55, title: "Refined", text: "If it were a person I'd say to this snack: You are a bucket of awesome. I mean like, You are infatuating.", rating: 5, snack_id: 24 },
+    { id: 56, title: "Small", text: "If it were a person I'd say to it: Is your ass jealous of the amount of shit that just came out of your mouth? I mean like, Your family tree must be a cactus because everybody on it is a prick.", rating: 1, snack_id: 25 },
+    { id: 57, title: "Gorgeous", text: "If it were a person I'd say to this snack: I would share my fruit Gushers with you. I mean like, I could hang out with you for a solid year and never get tired of you.", rating: 1, snack_id: 26 },
+    { id: 58, title: "Small", text: "If it were a person I'd say to it: Nice tan, orange is my favorite color. I mean like, You must have a very low opinion of people if you think they are your equals.", rating: 2, snack_id: 27 },
+    { id: 59, title: "Rustic", text: "If it were a person I'd say to this snack: I wish I could move your furniture. I mean like, If you were in a movie you wouldn't get killed off.", rating: 4, snack_id: 28 },
+    { id: 60, title: "Handcrafted", text: "If it were a person I'd say to it: Looks aren't everything; in your case, they aren't anything I mean like, Nice tan, orange is my favorite color.", rating: 1, snack_id: 29 },
+    { id: 61, title: "Tasty", text: "If it were a person I'd say to this snack: You are a champ! I mean like, I like those shoes more than mine.", rating: 5, snack_id: 30 },
+    { id: 62, title: "Awesome", text: "If it were a person I'd say to it: Your dad's condom is a bigger than your personality. I mean like, You're so fat your belly button has an echo echo echo...", rating: 2, snack_id: 31 },
+    { id: 63, title: "Bad for business", text: "My guards love these, but you try keeping the larder full when all of your Gamorians have the munchies!", rating: 1, snack_id: 31 },
+    { id: 64, title: "Biscotti Bliss!", text: "Cookie! Me want cookie!", rating: 4, snack_id: 31 },
+    { id: 65, title: "The treat that travels well", text: "I like 'em, and they are great at sea; they don't even need to be salt-packed!", rating: 4, snack_id: 31 },
+    { id: 66, title: "Seriously? Yuck", text: "I have certainly had sooooo much better.", rating: 1, snack_id: 31 },
+    { id: 67, title: "Solo! Solo! Too Nakma Noya Solo!", text: "Han ma boo-kee, keelee ka-lya dooka. Wadja da boolya ra Moy. Han, Mah kee cheezay. Hassatamooma koh kee malyaloongee.", rating: 5, snack_id: 31 },
+    { id: 68, title: "*Snobby Voice*", text: "Well I have certainly had sooooo much better.", rating: 1, snack_id: 2 },
+    { id: 69, title: "I can't have just one!", text: 'I love these! Not only are they yummy, but they give me that certain je ne sais quoi I need in the courage department to fight ghosts.', rating: 5, snack_id: 31 }
+  ])
+  .then(() =&gt; {
+    return knex.raw(`SELECT setval('reviews_id_seq', (SELECT MAX(id) FROM reviews));`)
+  })
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Wed Aug 29 2018 13:05:45 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+<script src="../../../block-navigation.js"></script>
+</body>
+</html>

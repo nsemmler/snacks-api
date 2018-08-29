@@ -1,0 +1,27 @@
+{
+  "name": "snacks-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "start": "node app.js",
+    "knex": "knex",
+    "test": "NODE_ENV=test jest --coverage __tests__/*/*.test.js --config ./__tests__/jest.config.js",
+    "setup": "npm i && echo  > .env && echo \"SECRET_KEY='secret' \nDATABASE_NAME='galvanizesnacks'\" >> .env && npm run reboot && npm run dev",
+    "reboot": "npm run knex migrate:rollback && npm run knex migrate:latest && npm run knex seed:run"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cors": "^2.8.4",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "jest": "^23.5.0",
+    "knex": "^0.15.2",
+    "morgan": "^1.9.0",
+    "nodemon": "^1.18.3",
+    "path": "^0.12.7",
+    "pg": "^7.4.3"
+  }
+}
