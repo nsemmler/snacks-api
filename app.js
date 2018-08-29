@@ -25,7 +25,6 @@ app.use('/api/snacks', snacksRoutes)
 
 // EH
 app.use((req, res) => {
-  // next({ status: 404, message: 'Route not found.' })
   const status = 404
   const message = `Could not ${req.method} ${req.path}`
 
