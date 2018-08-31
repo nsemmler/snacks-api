@@ -6,8 +6,8 @@ function index () {
 
 function create (body) {
   const fields = [ 'name', 'description', 'price', 'img', 'is_perishable' ]
-  if (!fields.every(field => body[field])) throw new Error('aFieldRequired')
-  if (!Object.keys(body).every(field => fields.includes(field))) throw new Error('superfluousSnackFields')
+  if (!fields.every(field => body[field])) return Promise.reject(new Error('aFieldRequired'))
+  if (!Object.keys(body).every(field => fields.includes(field))) return Promise.reject(new Error('superfluousSnackFields'))
 
   return knex('snacks')
 		.insert( body )
@@ -15,11 +15,11 @@ function create (body) {
 }
 
 function update (id, body) {
-  if (!Number.isInteger(id)) throw new Error('snackNotFound')
+  if (!Number.isInteger(id)) return Promise.reject(new Error('snackNotFound'))
 
   const fields = [ 'name', 'description', 'price', 'img', 'is_perishable' ]
-  if (Object.keys(body).length === 0) throw new Error('aFieldRequired')
-  if (!Object.keys(body).every(field => fields.includes(field))) throw new Error('superfluousSnackFields')
+  if (Object.keys(body).length === 0) return Promise.reject(new Error('aFieldRequired'))
+  if (!Object.keys(body).every(field => fields.includes(field))) return Promise.reject(new Error('superfluousSnackFields'))
 
   return knex('snacks')
 		.where({ id })
@@ -28,7 +28,7 @@ function update (id, body) {
 }
 
 function destroy (id) {
-  if (!Number.isInteger(id)) throw new Error('snackNotFound')
+  if (!Number.isInteger(id)) return Promise.reject(new Error('snackNotFound'))
 
   return knex('snacks')
 		.where({ id })
@@ -37,7 +37,7 @@ function destroy (id) {
 }
 
 function getSnackById(id) {
-  if (!Number.isInteger(id)) throw new Error('snackNotFound')
+  if (!Number.isInteger(id)) return Promise.reject(new Error('snackNotFound'))
 
 	return knex('snacks')
 		.where({ id })
@@ -57,7 +57,7 @@ function getFeatured() {
 }
 
 function generateRandomId(snackQty) {
-  if (!Number.isInteger(snackQty) || snackQty < 0) throw new Error('invalidQuantity')
+  if (!Number.isInteger(snackQty) || snackQty < 0) return Promise.reject(new Error('invalidQuantity'))
 	return Math.ceil(Math.random() * snackQty)
 }
 

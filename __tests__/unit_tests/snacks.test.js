@@ -48,44 +48,12 @@ describe('Snack Model', () => {
     })
 
     test('throws snackNotFound when given an invalid ID', async () => {
-      try {
-        await snacks.getSnackById(628394)
-        expect(true).toBe(false) // flag for if the above action DOESN'T fail
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
-    })
-    
-    test('throws snackNotFound when given no ID', async () => {
-      try {
-        await snacks.getSnackById()
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
-    })
+      expect.assertions(4)
 
-    test('throws snackNotFound when given an improper argument', async () => {
-      try {
-        await snacks.getSnackById('2')
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
-
-      try {
-        await snacks.getSnackById([4])
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
-
-      try {
-        await snacks.getSnackById({})
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
+      await expect(snacks.getSnackById(628394)).rejects.toMatchObject({ message: 'snackNotFound' })
+      await expect(snacks.getSnackById()).rejects.toMatchObject({ message: 'snackNotFound' })
+      await expect(snacks.getSnackById('2')).rejects.toMatchObject({ message: 'snackNotFound' })
+      await expect(snacks.getSnackById([4])).rejects.toMatchObject({ message: 'snackNotFound' })
     })
   })
 
@@ -121,27 +89,12 @@ describe('Snack Model', () => {
       expect(value).toBeLessThanOrEqual(10)
     })
 
-    test('throws snackNotFound when given an improper params', async () => {
-      try {
-        await snacks.generateRandomId()
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('invalidQuantity')
-      }
+    test('throws invalidQuantity when given an improper params', async () => {
+      expect.assertions(3)
 
-      try {
-        await snacks.generateRandomId(-10)
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('invalidQuantity')
-      }
-
-      try {
-        await snacks.generateRandomId([1, 2, 3])
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('invalidQuantity')
-      }
+      await expect(snacks.generateRandomId()).rejects.toMatchObject({ message: 'invalidQuantity' })
+      await expect(snacks.generateRandomId(-10)).rejects.toMatchObject({ message: 'invalidQuantity' })
+      await expect(snacks.generateRandomId([1, 2, 3])).rejects.toMatchObject({ message: 'invalidQuantity' })
     })
   })
 
@@ -179,34 +132,26 @@ describe('Snack Model', () => {
       await expect(numSnacks.length).toBe(initialSnacksLength.length + 1)
     })
 
-    test('throws error when missing params', async () => {
-      try {
-        await snacks.create({
-          name: "Pinecone",
-          description: "Rich in fiber"
-        })
+    test('throws aFieldRequired when missing params', async () => {
+      expect.assertions(1)
 
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('aFieldRequired')
-      }
+      await expect(snacks.create({
+        name: "Pinecone",
+        description: "Rich in fiber"
+      })).rejects.toMatchObject({ message: 'aFieldRequired' })
     })
 
-    test('throws error when missing params', async () => {
-      try {
-        await snacks.create({
-          name: "Donut",
-          description: "A fresh, glazed Krispy Kreme donut",
-          price: 1,
-          img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
-          is_perishable: true,
-          test: true
-        })
+    test('throws superfluousSnackFields when missing params', async () => {
+      expect.assertions(1)
 
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('superfluousSnackFields')
-      }
+      await expect(snacks.create({
+        name: "Donut",
+        description: "A fresh, glazed Krispy Kreme donut",
+        price: 1,
+        img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
+        is_perishable: true,
+        test: true
+      })).rejects.toMatchObject({ message: 'superfluousSnackFields' })
     })
   })
 
@@ -248,45 +193,23 @@ describe('Snack Model', () => {
     })
 
     test('throws snackNotFound when invalid ID provided', async () => {
-      try {
-        await snacks.update('1', { name: "New Name" })
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
+      expect.assertions(3)
 
-      try {
-        await snacks.update([1], { name: "New Name" })
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
-
-      try {
-        await snacks.update(null, { name: "New Name" })
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
+      await expect(snacks.update('1', { name: "New Name" })).rejects.toMatchObject({ message: 'snackNotFound' })
+      await expect(snacks.update([1], { name: "New Name" })).rejects.toMatchObject({ message: 'snackNotFound' })
+      await expect(snacks.update(null, { name: "New Name" })).rejects.toMatchObject({ message: 'snackNotFound' })
     })
 
     test('throws aFieldRequired when no snack body provided', async () => {
-      try {
-        await snacks.update(1, {})
-        expect(true).toBe(false)
-      } catch (e) {
-        console.log('ERROR: ', e);
-        expect(e.message).toBe('aFieldRequired')
-      }
+      expect.assertions(1)
+      
+      await expect(snacks.update(1, {})).rejects.toMatchObject({ message: 'aFieldRequired' })
     })
 
     test('throws superfluousSnackFields when snack body provided with invalid key/value pair(s)', async () => {
-      try {
-        await snacks.update(1, { notSnackKey: "value" })
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('superfluousSnackFields')
-      }
+      expect.assertions(1)
+
+      await expect(snacks.update(1, { notSnackKey: "value" })).rejects.toMatchObject({ message: 'superfluousSnackFields' })
     })
   })
 
@@ -305,26 +228,11 @@ describe('Snack Model', () => {
     })
 
     test('throws snackNotFound when invalid ID provided', async () => {
-      try {
-        await snacks.destroy()
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
+      expect.assertions(3)
 
-      try {
-        await snacks.destroy('1')
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
-
-      try {
-        await snacks.destroy([1])
-        expect(true).toBe(false)
-      } catch (e) {
-        expect(e.message).toBe('snackNotFound')
-      }
+      await expect(snacks.destroy()).rejects.toMatchObject({ message: 'snackNotFound' })
+      await expect(snacks.destroy('1')).rejects.toMatchObject({ message: 'snackNotFound' })
+      await expect(snacks.destroy([1])).rejects.toMatchObject({ message: 'snackNotFound' })
     })
   })
 })
