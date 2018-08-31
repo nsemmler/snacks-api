@@ -15,7 +15,7 @@ module.exports = {
 
   test: {
     client: 'pg',
-    connection: `postgres://localhost/${process.env.DATABASE_NAME}`,
+    connection: `postgres://localhost/${process.env.DATABASE_NAME}_test`,
     migrations: {
       directory: path.join(__dirname, 'db', 'migrations')
     },
