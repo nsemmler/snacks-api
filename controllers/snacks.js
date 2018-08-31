@@ -1,4 +1,4 @@
-const { snack } = require('../models')
+const { snack, review } = require('../models')
 const { isValidSnackCreate, isValidSnackPatch } = require('../middleware/bodyInspect')
 
 function index(req, res, next) {
