@@ -7,13 +7,18 @@
     "dev": "nodemon app.js",
     "start": "node app.js",
     "knex": "knex",
-    "test": "NODE_ENV=test jest --coverage __tests__/*/*.test.js --config ./__tests__/jest.config.js",
+    "test": "NODE_ENV=test jest --coverage __tests__/*_tests/*.test.js",
     "setup": "npm i && echo  > .env && echo \"SECRET_KEY='secret' \nDATABASE_NAME='galvanizesnacks'\" >> .env && npm run reboot && npm run dev",
     "reboot": "npm run knex migrate:rollback && npm run knex migrate:latest && npm run knex seed:run"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./__tests__/support.js",
+    "coverageDirectory": "./coverage"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-env": "^7.0.0",
     "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
