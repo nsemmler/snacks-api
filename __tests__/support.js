@@ -5,13 +5,15 @@ const knex = require('knex')
 const config = require('../knexfile')[process.env.NODE_ENV]
 let connection = knex(config)
 
-beforeEach(() => {
+beforeEach(async (done) => {
   connection = knex(config)
-  return connection.seed.run()
+  await connection.seed.run()
+  done()
 })
 
-afterEach(() => {
-  return connection.destroy()
+afterEach(async (done) => {
+  await connection.destroy()
+  done()
 })
 
 afterAll(() => db.destroy())
