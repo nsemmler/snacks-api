@@ -7,7 +7,7 @@
     "dev": "nodemon app.js",
     "start": "node app.js",
     "knex": "knex",
-    "test": "NODE_ENV=test jest --coverage __tests__/*_tests/*.test.js",
+    "test": "NODE_ENV=test jest --coverage --runInBand __tests__/*_tests/*.test.js",
     "setup": "npm i && echo  > .env && echo \"SECRET_KEY='secret' \nDATABASE_NAME='galvanizesnacks'\" >> .env && npm run reboot && npm run dev",
     "reboot": "npm run knex migrate:rollback && npm run knex migrate:latest && npm run knex seed:run"
   },
