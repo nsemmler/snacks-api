@@ -3,7 +3,7 @@ const snacks = require('../../models/snacks')
 describe('Snack Model', () => {
   describe('index()', () => {
     test('is defined', () => {
-      expect(snacks.index()).toBeDefined()
+      expect(snacks.index).toBeDefined()
     })
 
     test('returns all snacks in the database', async () => {
@@ -24,7 +24,7 @@ describe('Snack Model', () => {
 
   describe('getSnackById()', () => {
     test('is defined', () => {
-      expect(snacks.getSnackById(1)).toBeDefined()
+      expect(snacks.getSnackById).toBeDefined()
     })
 
     test('returns a snack given its ID', async () => {
@@ -59,7 +59,7 @@ describe('Snack Model', () => {
 
   describe('getFeatured()', () => {
     test('is defined', () => {
-      expect(snacks.getFeatured()).toBeDefined()
+      expect(snacks.getFeatured).toBeDefined()
     })
 
     test('returns an array of 3 randomly-selected snacks', async () => {
@@ -79,7 +79,7 @@ describe('Snack Model', () => {
 
   describe('generateRandomId()', () => {
     test('is defined', () => {
-      expect(snacks.generateRandomId(1)).toBeDefined()
+      expect(snacks.generateRandomId).toBeDefined()
     })
 
     test('generates a random number between 0 and x', () => {
@@ -100,13 +100,7 @@ describe('Snack Model', () => {
 
   describe('create()', () => {
     test('is defined', () => {
-      expect(snacks.create({
-        name: "Donut",
-        description: "A fresh, glazed Krispy Kreme donut",
-        price: 1,
-        img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
-        is_perishable: true
-      })).toBeDefined()
+      expect(snacks.create).toBeDefined()
     })
 
     test('creates a new snack', async () => {
@@ -157,13 +151,7 @@ describe('Snack Model', () => {
 
   describe('update()', async () => {
     test('is defined', () => {
-      expect(snacks.update(1, {
-        name: "Donut",
-        description: "A fresh, glazed Krispy Kreme donut",
-        price: 1,
-        img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
-        is_perishable: true
-      })).toBeDefined()
+      expect(snacks.update).toBeDefined()
     })
 
     test('identifies a particular snack given its ID and updates it', async () => {
@@ -202,7 +190,7 @@ describe('Snack Model', () => {
 
     test('throws aFieldRequired when no snack body provided', async () => {
       expect.assertions(1)
-      
+
       await expect(snacks.update(1, {})).rejects.toMatchObject({ message: 'aFieldRequired' })
     })
 
@@ -215,7 +203,7 @@ describe('Snack Model', () => {
 
   describe('destroy()', async () => {
     test('is defined', () => {
-      expect(snacks.destroy(1)).toBeDefined()
+      expect(snacks.destroy).toBeDefined()
     })
 
     test('deletes a snack by ID', async () => {
