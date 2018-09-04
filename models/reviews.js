@@ -20,6 +20,14 @@ function getReviewById(id) {
 }
 
 function create(snack_id, body) {
+  if (!Number.isInteger(snack_id)) return Promise.reject(new Error('reviewNotFound'))
+
+  const bodyKeys = Object.keys(body).sort()
+  if (!bodyKeys.includes('rating') || !bodyKeys.includes('text') || !bodyKeys.includes('title')) return Promise.reject(new Error('aFieldRequired'))
+
+  const additionalKeys = bodyKeys.filter(word => ![ 'id', 'title', 'text', 'rating', 'snack_id' ].includes(word))
+  if (additionalKeys.length !== 0) return Promise.reject(new Error('aFieldRequired'))
+
 	return knex('reviews')
 		.insert({snack_id, ...body})
 		.returning(['*'])
