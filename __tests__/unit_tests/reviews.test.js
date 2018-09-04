@@ -150,6 +150,48 @@ describe('Review Model', () => {
     test('is defined', () => {
       expect(reviews.update).toBeDefined()
     })
+
+    test('identifies a particular review given its ID and updates it', async () => {
+      const response = await reviews.update(4, 4, {
+        title: "Updated Title"
+      })
+
+      const expected = {
+        id: 4,
+        title: 'Updated Title',
+        text: 'If it were a person I\'d say to this snack: I would share my dessert with you. I mean like, You are a champ!',
+        rating: 5,
+        snack_id: 4
+      }
+
+      expect(response).toBeInstanceOf(Array)
+      expect(response[0]).toBeInstanceOf(Object)
+      expect(response[0]).toMatchObject(expected)
+      expect(response[0].title).toEqual('Updated Title')
+    })
+
+    test('throws reviewNotFound when invalid Snack ID or Review ID provided', async () => {
+      expect.assertions(6)
+
+      await expect(reviews.update(4, '1', { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.update(4, [1], { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.update(4, null, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.update('1', 4, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.update([1], 4, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.update(null, 4, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+    })
+
+    test('throws aFieldRequired when invalid body provided', async () => {
+      expect.assertions(1)
+
+      await expect(reviews.update(4, 4)).rejects.toMatchObject({ message: 'aFieldRequired' })
+    })
+
+    test('throws superfluousSnackFields when snack body provided with invalid key/value pair(s)', async () => {
+      expect.assertions(1)
+
+      await expect(reviews.update(4, 4, { notSnackKey: "value" })).rejects.toMatchObject({ message: 'superfluousReviewFields' })
+    })
   })
 
   describe('destroy()', () => {
@@ -158,78 +200,6 @@ describe('Review Model', () => {
     })
   })
 
-  //   test('throws superfluousSnackFields when missing params', async () => {
-  //     expect.assertions(1)
-  //
-  //     await expect(reviews.create({
-  //       name: "Donut",
-  //       description: "A fresh, glazed Krispy Kreme donut",
-  //       price: 1,
-  //       img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
-  //       is_perishable: true,
-  //       test: true
-  //     })).rejects.toMatchObject({ message: 'superfluousSnackFields' })
-  //   })
-  // })
-  //
-  // describe('update()', async () => {
-  //   test('is defined', () => {
-  //     expect(reviews.update(1, {
-  //       name: "Donut",
-  //       description: "A fresh, glazed Krispy Kreme donut",
-  //       price: 1,
-  //       img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
-  //       is_perishable: true
-  //     })).toBeDefined()
-  //   })
-  //
-  //   test('identifies a particular snack given its ID and updates it', async () => {
-  //     const response = await reviews.update(1, {
-  //       name: "New Name"
-  //     })
-  //
-  //     const expected = {
-  //       id: 1,
-  //       name: 'New Name',
-  //       description: 'Mauris lacinia sapien quis libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.',
-  //       price: 8,
-  //       img: 'https://az808821.vo.msecnd.net/content/images/thumbs/0000398_salt-pepper-pork-rinds-2-oz_560.jpeg',
-  //       is_perishable: true
-  //     }
-  //
-  //     expect(response).toBeInstanceOf(Array)
-  //     expect(response[0]).toBeInstanceOf(Object)
-  //     expect(response[0]).toMatchObject(expected)
-  //     expect(response[0]).toHaveProperty('id')
-  //     expect(response[0]).toHaveProperty('name')
-  //     expect(response[0]).toHaveProperty('description')
-  //     expect(response[0]).toHaveProperty('price')
-  //     expect(response[0]).toHaveProperty('img')
-  //     expect(response[0]).toHaveProperty('is_perishable')
-  //     expect(response[0].name).toEqual('New Name')
-  //   })
-  //
-  //   test('throws snackNotFound when invalid ID provided', async () => {
-  //     expect.assertions(3)
-  //
-  //     await expect(reviews.update('1', { name: "New Name" })).rejects.toMatchObject({ message: 'snackNotFound' })
-  //     await expect(reviews.update([1], { name: "New Name" })).rejects.toMatchObject({ message: 'snackNotFound' })
-  //     await expect(reviews.update(null, { name: "New Name" })).rejects.toMatchObject({ message: 'snackNotFound' })
-  //   })
-  //
-  //   test('throws aFieldRequired when no snack body provided', async () => {
-  //     expect.assertions(1)
-  //
-  //     await expect(reviews.update(1, {})).rejects.toMatchObject({ message: 'aFieldRequired' })
-  //   })
-  //
-  //   test('throws superfluousSnackFields when snack body provided with invalid key/value pair(s)', async () => {
-  //     expect.assertions(1)
-  //
-  //     await expect(reviews.update(1, { notSnackKey: "value" })).rejects.toMatchObject({ message: 'superfluousSnackFields' })
-  //   })
-  // })
-  //
   // describe('destroy()', async () => {
   //   test('is defined', () => {
   //     expect(reviews.destroy(1)).toBeDefined()
