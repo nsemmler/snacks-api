@@ -36,7 +36,7 @@ function create(snack_id, body) {
 function update(snack_id, id, body) {
   if (!body) return Promise.reject(new Error('aFieldRequired'))
   if (!Number.isInteger(snack_id) || !Number.isInteger(id)) return Promise.reject(new Error('reviewNotFound'))
-  
+
   const additionalKeys = Object.keys(body).sort().filter(word => ![ 'title', 'text', 'rating' ].includes(word))
   if (additionalKeys.length !== 0) return Promise.reject(new Error('superfluousReviewFields'))
 
@@ -47,7 +47,7 @@ function update(snack_id, id, body) {
 }
 
 function destroy(snack_id, id) {
-  if (!Number.isInteger(id)) return Promise.reject(new Error('reviewNotFound'))
+  if (!Number.isInteger(snack_id) || !Number.isInteger(id)) return Promise.reject(new Error('reviewNotFound'))
 
 	return knex('reviews')
 		.where({ snack_id, id })

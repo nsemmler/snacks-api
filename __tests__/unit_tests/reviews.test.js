@@ -198,28 +198,26 @@ describe('Review Model', () => {
     test('is defined', () => {
       expect(reviews.destroy).toBeDefined()
     })
-  })
 
-  // describe('destroy()', async () => {
-  //   test('is defined', () => {
-  //     expect(reviews.destroy(1)).toBeDefined()
-  //   })
-  //
-  //   test('deletes a snack by ID', async () => {
-  //     const initialreviewsLength = await reviews.index()
-  //     const response = await reviews.destroy(1)
-  //     const numreviews = await reviews.index()
-  //
-  //     expect(response).toBeTruthy()
-  //     await expect(numreviews.length).toBe(initialreviewsLength.length - 1)
-  //   })
-  //
-  //   test('throws snackNotFound when invalid ID provided', async () => {
-  //     expect.assertions(3)
-  //
-  //     await expect(reviews.destroy()).rejects.toMatchObject({ message: 'snackNotFound' })
-  //     await expect(reviews.destroy('1')).rejects.toMatchObject({ message: 'snackNotFound' })
-  //     await expect(reviews.destroy([1])).rejects.toMatchObject({ message: 'snackNotFound' })
-  //   })
-  // })
+    test('deletes a review by ID', async () => {
+      const snackReviewsBeforeDeletion = await reviews.getSnackReviews(4)
+
+      const response = await reviews.destroy(4, 4)
+      const snackReviewsAfterDeletion = await reviews.getSnackReviews(4)
+
+      expect(response).toBeTruthy()
+      await expect(snackReviewsAfterDeletion.length).toBe(snackReviewsBeforeDeletion.length - 1)
+    })
+
+    test('throws snackNotFound when invalid Snack or Review ID provided', async () => {
+      expect.assertions(6)
+
+      await expect(reviews.destroy(4, '1')).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.destroy(4, [1])).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.destroy(4, null)).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.destroy('1', 4)).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.destroy([1], 4)).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.destroy(null, 4)).rejects.toMatchObject({ message: 'reviewNotFound' })
+    })
+  })
 })
