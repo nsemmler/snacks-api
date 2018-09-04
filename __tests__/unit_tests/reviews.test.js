@@ -83,89 +83,81 @@ describe('Review Model', () => {
     })
 
     test('creates a new review', async () => {
-      const response = await reviews.create(3, {
-        title: 'Wonderful',
-        text: 'Deeper than the holler! Stronger than the river!!! Longer than the song of a whippoorwill!!!  Wow!!!',
-        rating: 5
+      const snackReviews = await reviews.getSnackReviews(4)
+
+      const newReview = await reviews.create(4, {
+        title: "Incredible!",
+        text: "It was the best everrr.",
+        rating: 2
       })
 
-      expect(response).toBeInstanceOf(Array)
-      expect(response).toHaveLength(1)
-      
-      const review = response[0]
-      
+      const review = newReview[0]
+      const numReviews = await reviews.getSnackReviews(4)
+
+      expect(review).toBeInstanceOf(Object)
       expect(review).toHaveProperty('id')
       expect(review).toHaveProperty('title')
       expect(review).toHaveProperty('text')
       expect(review).toHaveProperty('rating')
       expect(review).toHaveProperty('snack_id')
+      await expect(numReviews.length).toBe(snackReviews.length + 1)
+    })
+
+    test('throws reviewNotFound when given invalid Snack ID', async () => {
+      expect.assertions(3)
+
+      await expect(reviews.create({
+        title: "Incredible!",
+        text: "It was the best everrr.",
+        rating: 2
+      })).rejects.toMatchObject({ message: 'reviewNotFound' })
+
+      await expect(reviews.create('1', {
+        title: "Incredible!",
+        text: "It was the best everrr.",
+        rating: 2
+      })).rejects.toMatchObject({ message: 'reviewNotFound' })
+
+      await expect(reviews.create([1, 2, 3], {
+        title: "Incredible!",
+        text: "It was the best everrr.",
+        rating: 2
+      })).rejects.toMatchObject({ message: 'reviewNotFound' })
+    })
+
+    test('throws aFieldRequired when provided invalid params', async () => {
+      expect.assertions(3)
+
+      await expect(reviews.create(1, {
+        rating: 2
+      })).rejects.toMatchObject({ message: 'aFieldRequired' })
+
+      await expect(reviews.create(1, {
+        title: "Indescribible!",
+        rating: 2
+      })).rejects.toMatchObject({ message: 'aFieldRequired' })
+
+      await expect(reviews.create(1, {
+        title: "Incredible!",
+        text: "text",
+        username: "goldilocks",
+        rating: 2
+      })).rejects.toMatchObject({ message: 'aFieldRequired' })
     })
   })
 
-  // describe('generateRandomId()', () => {
-  //   test('is defined', () => {
-  //     expect(reviews.generateRandomId(1)).toBeDefined()
-  //   })
-  //
-  //   test('generates a random number between 0 and x', () => {
-  //     const value = reviews.generateRandomId(10)
-  //
-  //     expect(value).toBeGreaterThanOrEqual(0)
-  //     expect(value).toBeLessThanOrEqual(10)
-  //   })
-  //
-  //   test('throws invalidQuantity when given an improper params', async () => {
-  //     expect.assertions(3)
-  //
-  //     await expect(reviews.generateRandomId()).rejects.toMatchObject({ message: 'invalidQuantity' })
-  //     await expect(reviews.generateRandomId(-10)).rejects.toMatchObject({ message: 'invalidQuantity' })
-  //     await expect(reviews.generateRandomId([1, 2, 3])).rejects.toMatchObject({ message: 'invalidQuantity' })
-  //   })
-  // })
-  //
-  // describe('create()', () => {
-  //   test('is defined', () => {
-  //     expect(reviews.create({
-  //       name: "Donut",
-  //       description: "A fresh, glazed Krispy Kreme donut",
-  //       price: 1,
-  //       img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
-  //       is_perishable: true
-  //     })).toBeDefined()
-  //   })
-  //
-  //   test('creates a new snack', async () => {
-  //     const initialreviewsLength = await reviews.index()
-  //     const newSnackArr = await reviews.create({
-  //       name: "Donut",
-  //       description: "A fresh, glazed Krispy Kreme donut",
-  //       price: 1,
-  //       img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
-  //       is_perishable: true
-  //     })
-  //
-  //     const snack = newSnackArr[0]
-  //     const numreviews = await reviews.index()
-  //
-  //     expect(snack).toBeInstanceOf(Object)
-  //     expect(snack).toHaveProperty('id')
-  //     expect(snack).toHaveProperty('name')
-  //     expect(snack).toHaveProperty('description')
-  //     expect(snack).toHaveProperty('price')
-  //     expect(snack).toHaveProperty('img')
-  //     expect(snack).toHaveProperty('is_perishable')
-  //     await expect(numreviews.length).toBe(initialreviewsLength.length + 1)
-  //   })
-  //
-  //   test('throws aFieldRequired when missing params', async () => {
-  //     expect.assertions(1)
-  //
-  //     await expect(reviews.create({
-  //       name: "Pinecone",
-  //       description: "Rich in fiber"
-  //     })).rejects.toMatchObject({ message: 'aFieldRequired' })
-  //   })
-  //
+  describe('update()', () => {
+    test('is defined', () => {
+      expect(reviews.update).toBeDefined()
+    })
+  })
+
+  describe('destroy()', () => {
+    test('is defined', () => {
+      expect(reviews.destroy).toBeDefined()
+    })
+  })
+
   //   test('throws superfluousSnackFields when missing params', async () => {
   //     expect.assertions(1)
   //
