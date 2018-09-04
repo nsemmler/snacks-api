@@ -136,7 +136,7 @@ describe('Review Model', () => {
     })
 
     test('identifies a particular review given its ID and updates it', async () => {
-      const response = await reviews.update(4, 4, {
+      const response = await reviews.update(4, {
         title: "Updated Title"
       })
 
@@ -154,27 +154,24 @@ describe('Review Model', () => {
       expect(response[0].title).toEqual('Updated Title')
     })
 
-    test('throws reviewNotFound when invalid Snack ID or Review ID provided', async () => {
-      expect.assertions(6)
+    test('throws reviewNotFound when invalid review ID provided', async () => {
+      expect.assertions(3)
 
-      await expect(reviews.update(4, '1', { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
-      await expect(reviews.update(4, [1], { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
-      await expect(reviews.update(4, null, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
-      await expect(reviews.update('1', 4, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
-      await expect(reviews.update([1], 4, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
-      await expect(reviews.update(null, 4, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.update('1', { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.update([1], { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
+      await expect(reviews.update(null, { title: "Updated Title" })).rejects.toMatchObject({ message: 'reviewNotFound' })
     })
 
     test('throws aFieldRequired when invalid body provided', async () => {
       expect.assertions(1)
 
-      await expect(reviews.update(4, 4)).rejects.toMatchObject({ message: 'aFieldRequired' })
+      await expect(reviews.update(4)).rejects.toMatchObject({ message: 'aFieldRequired' })
     })
 
     test('throws superfluousSnackFields when snack body provided with invalid key/value pair(s)', async () => {
       expect.assertions(1)
 
-      await expect(reviews.update(4, 4, { notSnackKey: "value" })).rejects.toMatchObject({ message: 'superfluousReviewFields' })
+      await expect(reviews.update(4, { notSnackKey: "value" })).rejects.toMatchObject({ message: 'superfluousReviewFields' })
     })
   })
 

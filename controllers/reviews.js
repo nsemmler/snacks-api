@@ -2,26 +2,31 @@ const { snack, review } = require('../models')
 const { isValidSnackCreate, isValidSnackPatch } = require('../middleware/bodyInspect')
 
 function create(req, res, next) {
+	const id = parseInt(req.params.id)
+
 	isValidReviewCreate(req.body)
-		.then(() => snack.getSnackById(req.params.id))
-		.then(() => review.create(req.params.id, req.body))
+		.then(() => snack.getSnackById(id))
+		.then(() => review.create(id, req.body))
 		.then(data => res.status(201).json({ data }))
 		.catch(err => next(err))
 }
 
 function update(req, res, next) {
+	const id = parseInt(req.params.id)
+	const revId = parseInt(req.params.revId)
+
 	isValidReviewPatch(req.body)
-		.then(() => snack.getSnackById(req.params.id))
-		.then(() => review.getReviewById(req.params.revId))
-		.then(() => review.update(req.params.id, req.params.revId, req.body))
+		.then(() => snack.getSnackById(id))
+		.then(() => review.getReviewById(revId))
+		.then(() => review.update(revId, req.body))
 		.then(reviews => res.status(200).json({ data: reviews }))
 		.catch(err => next(err))
 }
 
 function destroy(req, res, next) {
-	snack.getSnackById(req.params.id)
-		.then(() => review.getReviewById(req.params.revId))
-		.then(() => review.update(req.params.id, req.params.revId, req.body))
+	const revId = parseInt(req.params.revId)
+
+	review.destroy(revId))
 		.then(reviews => res.status(202).json({ data: reviews }))
 		.catch(err => next(err))
 }
