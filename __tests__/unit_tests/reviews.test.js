@@ -6,34 +6,18 @@ describe('Review Model', () => {
       expect(reviews.getSnackReviews).toBeDefined()
     })
 
-    // test('returns a snack review given the snack ID', async () => {
-    //   const response = await reviews.getSnackReviews(4)
-    //   const reviews = [{
-    //       id: 4,
-    //       title: 'Refined!',
-    //       text: 'If it were a person I\'d say to this snack: I would share my dessert with you. I mean like, You are a champ!',
-    //       rating: 5,
-    //       snack_id: 4
-    //     },
-    //     {
-    //       id: 35,
-    //       title: 'Small',
-    //       text: 'If it were a person I\'d say to this snack: You and Chuck Norris are on equal levels. I mean like, You make the gloomy days a little less gloomy.',
-    //       rating: 3,
-    //       snack_id: 4
-    //     }]
-    //
-    //   expect(response).toBeInstanceOf(Array)
-    //   expect(response).toMatch(reviews)
-    //
-    //   var review = response[0]
-    //
-    //   expect(review).toHaveProperty('id')
-    //   expect(review).toHaveProperty('title')
-    //   expect(review).toHaveProperty('text')
-    //   expect(review).toHaveProperty('rating')
-    //   expect(review).toHaveProperty('snack_id')
-    // })
+    test('returns a snack review given the snack ID', async () => {
+      const response = await reviews.getSnackReviews(4)
+
+      expect(response).toBeInstanceOf(Array)
+      var review = response[0]
+      expect(review).toBeInstanceOf(Object)
+      expect(review).toHaveProperty('id')
+      expect(review).toHaveProperty('title')
+      expect(review).toHaveProperty('text')
+      expect(review).toHaveProperty('rating')
+      expect(review).toHaveProperty('snack_id')
+    })
 
     test('throws reviewNotFound when given an invalid ID', async () => {
       expect.assertions(3)
