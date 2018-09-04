@@ -15,6 +15,7 @@ function processErrorMessage(err) {
         case 'reviewNotFound': return { status: 404, message: 'Review with provided ID is not found' }
         case 'invalidQuantity': return { status: 404, message: 'Snack quantity must be an integer' }
         case 'superfluousSnackFields': return { status: 404, message: 'Snacks must only have the following fields: "name", "description", "price", "img", or "is_perishable"' }
+        case 'superfluousReviewFields': return { status: 404, message: 'Reviews must only have the following fields: "title", "text", or "rating"' }
 
         default:
           return { status: 500, message: 'An internal server error has occurred.' }
