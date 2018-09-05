@@ -67,8 +67,7 @@ describe('Snack Model', () => {
 
       expect(responseArr).toBeInstanceOf(Array)
       expect(responseArr).toHaveLength(3)
-      const firstSnack = responseArr[0]
-      expect(firstSnack).toHaveProperty('id')
+      const firstSnack = responseArr[0] ? responseArr[0] : responseArr[1]
       expect(firstSnack).toHaveProperty('name')
       expect(firstSnack).toHaveProperty('description')
       expect(firstSnack).toHaveProperty('price')
