@@ -4,7 +4,7 @@ require('dotenv').load()
 
 describe('/snacks', () => {
   describe('GET /snacks', () => {
-    test('should list all snacks', async (done) => {
+    test('should list all snacks', async () => {
       var response = await request(app).get("/api/snacks")
       snacks = response.body.data
 
@@ -16,7 +16,6 @@ describe('/snacks', () => {
       expect(snacks[0]).toHaveProperty("price", 8)
       expect(snacks[0]).toHaveProperty("img", "https://az808821.vo.msecnd.net/content/images/thumbs/0000398_salt-pepper-pork-rinds-2-oz_560.jpeg")
       expect(snacks[0]).toHaveProperty("is_perishable", true)
-      done()
     })
   })
 
@@ -42,6 +41,16 @@ describe('/snacks', () => {
       expect(newSnack[0]).toHaveProperty('img', 'https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg')
       expect(newSnack[0]).toHaveProperty('is_perishable', true)
       done()
+    })
+
+    test('should throw status 400 if given a bad request', async () => {
+      var response = await request(app).post("/api/snacks")
+        .send({
+          name: "Donut",
+          description: "A mediocre donut"
+        })
+
+      expect(response.statusCode).toBe(400)
     })
   })
 
@@ -79,6 +88,16 @@ describe('/snacks', () => {
       expect(snack).toHaveProperty("is_perishable", true)
       done()
     })
+
+    test('should throw status 400 if given a bad request', async () => {
+      var responseOne = await request(app).get("/api/snacks/-2.2")
+      var responseTwo = await request(app).get("/api/snacks/[]")
+      var responseThree = await request(app).get("/api/snacks/one")
+
+      expect(responseOne.statusCode).toBe(404)
+      expect(responseTwo.statusCode).toBe(404)
+      expect(responseThree.statusCode).toBe(404)
+    })
   })
 
   describe('PATCH /snacks/:id', () => {
@@ -105,12 +124,28 @@ describe('/snacks', () => {
       expect(response.type).toEqual("application/json")
       done()
     })
+
+    test('should throw status 404 if given a bad request', async () => {
+      var responseOne = await request(app).patch("/api/snacks/-2.2").send({ name: "Natey" })
+      var responseTwo = await request(app).patch("/api/snacks/[]").send({ name: "Natey" })
+      var responseThree = await request(app).patch("/api/snacks/one").send({ name: "Natey" })
+
+      expect(responseOne.statusCode).toBe(404)
+      expect(responseTwo.statusCode).toBe(404)
+      expect(responseThree.statusCode).toBe(404)
+    })
   })
 
   describe('DELETE /snacks/:id', () => {
     test('destroys a snack given its ID', async () => {
       const response = await request(app).del("/api/snacks/4")
       expect(response.statusCode).toBe(202)
+    })
+
+    test('should throw status 404 if given a bad request', async () => {
+      var response = await request(app).del("/api/snacks/four")
+
+      expect(response.statusCode).toBe(404)
     })
   })
 })
