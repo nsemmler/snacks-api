@@ -25,6 +25,27 @@ describe('/reviews', () => {
       expect(newSnack[0]).toHaveProperty('snack_id', 4)
       done()
     })
+
+    test('should throw status 400 if given a invalid body', async () => {
+      var response = await request(app).post("/api/snacks/1/reviews")
+        .send({
+          title: "Yum"
+        })
+
+      expect(response.statusCode).toBe(400)
+    })
+
+    test('should throw status 404 if request send to incorrect url', async () => {
+      var responseOne = await request(app).post("/api/snacks/-2.2/reviews")
+        .send({
+          title: "Yum",
+          text: "The 'love urslf 2 death chocolate cake' was ok",
+          rating: 1,
+          snack_id: 4
+        })
+
+      expect(responseOne.statusCode).toBe(404)
+    })
   })
 
   describe('PATCH /reviews/:revId', () => {
@@ -50,12 +71,35 @@ describe('/reviews', () => {
       expect(response.type).toEqual("application/json")
       done()
     })
+
+    test('should throw status 400 if given a bad request', async () => {
+      var responseOne = await request(app).patch("/api/snacks/-2.2/reviews/1").send({ name: "Natey" })
+      var responseTwo = await request(app).patch("/api/snacks/[]/reviews/1").send({ name: "Natey" })
+      var responseThree = await request(app).patch("/api/snacks/one/reviews/1").send({ name: "Natey" })
+
+      var responseFour = await request(app).patch("/api/snacks/1/reviews/-1").send({ name: "Natey" })
+      var responseFive = await request(app).patch("/api/snacks/1/reviews/two").send({ name: "Natey" })
+      var responseSix = await request(app).patch("/api/snacks/1/reviews/{4: 3}").send({ name: "Natey" })
+
+      expect(responseOne.statusCode).toBe(400)
+      expect(responseTwo.statusCode).toBe(400)
+      expect(responseThree.statusCode).toBe(400)
+      expect(responseFour.statusCode).toBe(400)
+      expect(responseFive.statusCode).toBe(400)
+      expect(responseSix.statusCode).toBe(400)
+    })
   })
 
   describe('DELETE /reviews/:revId', () => {
     test('destroys a review given its ID', async () => {
       const response = await request(app).del("/api/snacks/4/reviews/4")
       expect(response.statusCode).toBe(202)
+    })
+
+    test('should throw status 404 if given a bad request', async () => {
+      var response = await request(app).del("/api/snacks/four/reviews/four")
+
+      expect(response.statusCode).toBe(404)
     })
   })
 })
