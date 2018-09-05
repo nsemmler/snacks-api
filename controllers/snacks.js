@@ -55,8 +55,8 @@ function update(req, res, next) {
 function destroy(req, res, next) {
 	const id = parseInt(req.params.id)
 
-  	snack.getSnackById(req.params.id)
-	  	.then(() => snack.destroy(id))
+	snack.getSnackById(id)
+  	.then(() => snack.destroy(id))
 		.then(data => res.status(202).json({ data }))
 		.catch(err => next(err))
 }

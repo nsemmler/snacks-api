@@ -52,10 +52,10 @@ describe('/reviews', () => {
     })
   })
 
-  // describe('DELETE /reviews/:revId', () => {
-  //   test('destroys a review given its ID', async (done) => {
-  //     const response = await request(app).del("/api/snacks/4/review/:revIds")
-  //     expect(response.statusCode).toBe(202)
-  //   })
-  // })
+  describe('DELETE /reviews/:revId', () => {
+    test('destroys a review given its ID', async () => {
+      const response = await request(app).del("/api/snacks/4/reviews/4")
+      expect(response.statusCode).toBe(202)
+    })
+  })
 })

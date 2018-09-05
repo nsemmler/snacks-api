@@ -107,10 +107,10 @@ describe('/snacks', () => {
     })
   })
 
-  // describe('DELETE /snacks/:id', () => {
-  //   test('destroys a snack given its ID', async (done) => {
-  //     const response = await request(app).del("/api/snacks/4")
-  //     expect(response.statusCode).toBe(202)
-  //   })
-  // })
+  describe('DELETE /snacks/:id', () => {
+    test('destroys a snack given its ID', async () => {
+      const response = await request(app).del("/api/snacks/4")
+      expect(response.statusCode).toBe(202)
+    })
+  })
 })
