@@ -9,19 +9,24 @@ const port = process.env.PORT || 3000
 // config app w/ routes
 dotenv.config()
 const app = express()
-const { snacksRoutes } = require('./routes')
+const { snacksRoutes, reviewsRoutes } = require('./routes')
 
 // middleware
+const processErrorMessage = require('./middleware/errors')
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 app.disable('x-powered-by')
 
 // listener
-app.listen(port, () => console.log(`Listening on port ${port}`))
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => console.log(`Listening on port ${port}`))
+}
 
 // API
 app.use('/api/snacks', snacksRoutes)
+app.use('/api/snacks/:id/reviews', reviewsRoutes)
 
 // EH
 app.use((req, res) => {
