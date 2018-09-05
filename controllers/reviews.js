@@ -1,5 +1,5 @@
 const { snack, review } = require('../models')
-const { isValidSnackCreate, isValidSnackPatch } = require('../middleware/bodyInspect')
+const { isValidReviewCreate, isValidReviewPatch } = require('../middleware/bodyInspect')
 
 function create(req, res, next) {
 	const id = parseInt(req.params.id)
