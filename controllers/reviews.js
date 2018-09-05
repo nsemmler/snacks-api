@@ -26,7 +26,7 @@ function update(req, res, next) {
 function destroy(req, res, next) {
 	const revId = parseInt(req.params.revId)
 
-	review.destroy(revId))
+	review.destroy(revId)
 		.then(reviews => res.status(202).json({ data: reviews }))
 		.catch(err => next(err))
 }
