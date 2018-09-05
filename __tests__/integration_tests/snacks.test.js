@@ -1,64 +1,116 @@
-// // see https://github.com/request/request-promise
-// // const requestPromise = require('request-promise')
-//
-// // in case you want to mess with where the integration test happens
-// const api = process.env.API_URL || 'http://localhost:3200'
-//
-// /************************************************************************
-//  * Test Setup Functions
-//  * These functions make our actual tests much shorter and readable
-//  ************************************************************************/
-//
-// // this accepts request options,
-// // and returns a function that makes a request with those options
-// // which tests the result against a snapshot
-// const testEndpointSnapshot = (requestOptions, options = {}) =>
-//   // returns function, so you can pass it right into a test
-//   () =>
-//     // Makes a request with those options
-//     requestPromise(requestOptions).then(result =>
-//       // expect the result to match a snapshot named after the uri
-//       expect(result).toMatchSnapshot(
-//         requestOptions.method +
-//           ' ' +
-//           requestOptions.uri +
-//           (options.snapShotName || '')
-//       )
-//     )
-//
-// // short cut for get requests, so all that you need to pass in is the uri
-// const testGetEndpoint = (endpoint, options = {}) =>
-//   testEndpointSnapshot(
-//     {
-//       method: 'GET',
-//       uri: api + endpoint
-//     },
-//     options
-//   )
-//
-// /************************************************************************
-//  * Actual Tests
-//  * Where the actual tests are being described and run
-//  ************************************************************************/
-//
-// // Describe the /products route
-// describe('/products', () => {
-//   // remember that `testGetEndpoint('/products/')` returns a function,
-//   // which will be run as the test.
-//   it('should list all products', testGetEndpoint('/products/'))
-//   // remember that `testEndpointSnapshot({...})` returns a function,
-//   // which will be run as the test.
-//   it(
-//     'should create a new product',
-//     testEndpointSnapshot({
-//       json: true,
-//       method: 'POST',
-//       uri: api + '/products/',
-//       body: {
-//         name: 'some product',
-//         description: 'shoes',
-//         price: 12.25
-//       }
-//     })
-//   )
-// })
+const app = require('../../app')
+const request = require("supertest")
+require('dotenv').load()
+
+describe('/snacks', () => {
+  describe('GET /snacks', () => {
+    test('should list all snacks', async (done) => {
+      var response = await request(app).get("/api/snacks")
+      snacks = response.body.data
+
+      expect(snacks).toBeInstanceOf(Array)
+      expect(response.statusCode).toBe(201)
+      expect(response.type).toEqual("application/json")
+      expect(snacks[0]).toHaveProperty("name", "Pork Rinds")
+      expect(snacks[0]).toHaveProperty("description", "Mauris lacinia sapien quis libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.")
+      expect(snacks[0]).toHaveProperty("price", 8)
+      expect(snacks[0]).toHaveProperty("img", "https://az808821.vo.msecnd.net/content/images/thumbs/0000398_salt-pepper-pork-rinds-2-oz_560.jpeg")
+      expect(snacks[0]).toHaveProperty("is_perishable", true)
+      done()
+    })
+  })
+
+  describe('POST /snacks', () => {
+    test('creates a new snack', async (done) => {
+      var response = await request(app).post("/api/snacks")
+        .send({
+          name: "Donut",
+          description: "A fresh, glazed Krispy Kreme donut",
+          price: 1,
+          img: "https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg",
+          is_perishable: true
+        })
+      const newSnack = response.body.data
+
+      expect(newSnack).toBeInstanceOf(Array)
+      expect(newSnack[0]).toBeInstanceOf(Object)
+      expect(response.statusCode).toBe(201)
+      expect(response.type).toEqual("application/json")
+      expect(newSnack[0]).toHaveProperty('name', 'Donut')
+      expect(newSnack[0]).toHaveProperty('description', 'A fresh, glazed Krispy Kreme donut')
+      expect(newSnack[0]).toHaveProperty('price', 1)
+      expect(newSnack[0]).toHaveProperty('img', 'https://www.krispykreme.com/getattachment/1aa956f7-e7ca-4e27-bcc6-a603211d7c68/Original-Glazed-Doughnut.aspx?width=310&height=310&mode=max&quality=60&format=jpg')
+      expect(newSnack[0]).toHaveProperty('is_perishable', true)
+      done()
+    })
+  })
+
+  describe('GET /snacks/featured', () => {
+    test('returns 3 featured snacks', async (done) => {
+      var response = await request(app).get("/api/snacks/featured")
+      var featured = response.body.data
+
+      expect(featured).toBeInstanceOf(Array)
+      expect(featured).toHaveLength(3)
+      expect(response.statusCode).toBe(201)
+      expect(response.type).toEqual("application/json")
+      expect(featured[0]).toHaveProperty('id')
+      expect(featured[0]).toHaveProperty('name')
+      expect(featured[0]).toHaveProperty('description')
+      expect(featured[0]).toHaveProperty('price')
+      expect(featured[0]).toHaveProperty('img')
+      expect(featured[0]).toHaveProperty('is_perishable')
+      done()
+    })
+  })
+
+  describe('GET /snacks/:id', () => {
+    test('returns a snack given its ID', async (done) => {
+      var response = await request(app).get("/api/snacks/1")
+      snack = response.body.data
+
+      expect(snack).toBeInstanceOf(Object)
+      expect(response.statusCode).toBe(201)
+      expect(response.type).toEqual("application/json")
+      expect(snack).toHaveProperty("name", "Pork Rinds")
+      expect(snack).toHaveProperty("description", "Mauris lacinia sapien quis libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.")
+      expect(snack).toHaveProperty("price", 8)
+      expect(snack).toHaveProperty("img", "https://az808821.vo.msecnd.net/content/images/thumbs/0000398_salt-pepper-pork-rinds-2-oz_560.jpeg")
+      expect(snack).toHaveProperty("is_perishable", true)
+      done()
+    })
+  })
+
+  describe('PATCH /snacks/:id', () => {
+    test('updates a snack given its ID', async (done) => {
+      var response = await request(app).patch("/api/snacks/1")
+        .send({
+          name: "Something Holy"
+        })
+
+      const modifiedSnack = [{
+        "description": "Mauris lacinia sapien quis libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis.",
+        "id": 1,
+        "img": "https://az808821.vo.msecnd.net/content/images/thumbs/0000398_salt-pepper-pork-rinds-2-oz_560.jpeg",
+        "is_perishable": true,
+        "name": "Something Holy",
+        "price": 8
+      }]
+
+      const updatedSnack = response.body.data
+
+      expect(updatedSnack).toBeInstanceOf(Object)
+      expect(updatedSnack).toMatchObject(modifiedSnack)
+      expect(response.statusCode).toBe(200)
+      expect(response.type).toEqual("application/json")
+      done()
+    })
+  })
+
+  // describe('DELETE /snacks/:id', () => {
+  //   test('destroys a snack given its ID', async (done) => {
+  //     const response = await request(app).del("/api/snacks/4")
+  //     expect(response.statusCode).toBe(202)
+  //   })
+  // })
+})
