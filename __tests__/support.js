@@ -16,4 +16,7 @@ afterEach(async (done) => {
   done()
 })
 
-afterAll(() => db.destroy())
+afterAll(async (done) => {
+  await db.destroy()
+  done()
+})
