@@ -37,6 +37,7 @@ app.use((req, res) => {
 })
 
 app.use((err, req, res, next) => {
+  // console.error(err)
   error = processErrorMessage(err)
 
   if (process.env.NODE_ENV !== 'test') console.error(error)
