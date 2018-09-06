@@ -4,7 +4,7 @@ require('dotenv').load()
 
 describe('/reviews', () => {
   describe('POST /reviews', () => {
-    test('creates a new review', async (done) => {
+    test('creates a new review', async () => {
       var response = await request(app).post("/api/snacks/1/reviews")
         .send({
           title: "Yum",
@@ -23,7 +23,6 @@ describe('/reviews', () => {
       expect(newSnack[0]).toHaveProperty('text', "The 'love urslf 2 death chocolate cake' was ok")
       expect(newSnack[0]).toHaveProperty('rating', 1)
       expect(newSnack[0]).toHaveProperty('snack_id', 4)
-      done()
     })
 
     test('should throw status 400 if given a invalid body', async () => {
@@ -49,7 +48,7 @@ describe('/reviews', () => {
   })
 
   describe('PATCH /reviews/:revId', () => {
-    test('updates a review given its ID', async (done) => {
+    test('updates a review given its ID', async () => {
       var response = await request(app).patch("/api/snacks/3/reviews/3")
         .send({
           title: "Something Holy"
@@ -69,7 +68,6 @@ describe('/reviews', () => {
       expect(updatedSnack).toMatchObject(modifiedSnack)
       expect(response.statusCode).toBe(200)
       expect(response.type).toEqual("application/json")
-      done()
     })
 
     test('should throw status 400 if given a bad request', async () => {
