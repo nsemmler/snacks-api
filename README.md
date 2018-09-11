@@ -1,77 +1,18 @@
-# Snacks API
+# Express App w/ TDD and CI
 
-[![Build Status](https://travis-ci.org/nsemmler/snacks-api.svg?branch=master)](https://travis-ci.org/nsemmler/snacks-api)
+### Overview
 
-## Built With
+This is a clone of the following repository built following a Test-Driven Development methodology:
+(https://github.com/just-hey/galvanize-snacks-api)
 
-* [Express]
-* [Node]
-* [Jest]
+It is also continuously integrated using Travis CI.
 
-## Database Structure
+## Coverage Map
 
-![](./images/Snacks-ERD.png)
+![](./images/coverage.png)
 
 ## Setup
 1. Fork and clone this repository
-1. `cd galvanize-snacks-api/`
-1. `createdb galvanizesnacks`
+1. `cd tutory-backend/`
+1. `createdb snacks`
 1. `npm run setup`
-
-This project followed a TDD methodology.
-
-## Routes
-
-**GET /api/snacks**
-
-**GET /api/snacks/featured**
-
-**GET /api/snacks/:id**
-
-**POST /api/snacks**
-- required fields in body:
-```
-{
-    name,           // STRING
-    description,    // STRING
-    price,          // FLOAT
-    img,            // STRING
-    is_perishable   // BOOLEAN
-}
-```
-
-**POST /api/snacks/:id/reviews**
-- required fields in body:
-```
-{
-    title,          // STRING
-    text,           // STRING
-    rating,         // INTEGER
-}
-```
-
-**PATCH /api/snacks/:id**
-- at least one(1) of the following fields in body is required:
-```
-{
-    name,           // STRING
-    description,    // STRING
-    price,          // FLOAT
-    img,            // STRING
-    is_perishable   // BOOLEAN
-}
-```
-
-**PATCH /api/snacks/:id/reviews/:id**
-- at least one(1) of the following fields in body is required:
-```
-{
-    title,          // STRING
-    text,           // STRING
-    rating,         // INTEGER
-}
-```
-
-**DELETE /api/snacks/:id**
-
-**DELETE /api/snacks/:id/reviews/:id**

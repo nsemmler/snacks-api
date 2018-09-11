@@ -2,6 +2,17 @@ const reviews = require('../../models/reviews')
 
 describe('Review Model', () => {
   describe('getSnackReviews()', () => {
+    var originalTimeout
+
+    beforeEach(() => {
+      originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+    })
+
+    afterEach(() => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
+    })
+
     test('is defined', () => {
       expect(reviews.getSnackReviews).toBeDefined()
     })

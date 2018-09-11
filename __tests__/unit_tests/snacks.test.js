@@ -2,6 +2,17 @@ const snacks = require('../../models/snacks')
 
 describe('Snack Model', () => {
   describe('index()', () => {
+    var originalTimeout
+
+    beforeEach(() => {
+      originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+    })
+
+    afterEach(() => {
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout
+    })
+
     test('is defined', () => {
       expect(snacks.index).toBeDefined()
     })
