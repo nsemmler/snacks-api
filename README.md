@@ -9,7 +9,7 @@ It is also continuously integrated using Travis CI.
 
 ## Coverage Map
 
-![](./images/coverage.png)
+![](images/coverage.png)
 
 ## Setup
 1. Fork and clone this repository
