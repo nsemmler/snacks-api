@@ -15,4 +15,4 @@ It is also continuously integrated using Travis CI.
 1. Fork and clone this repository
 1. `cd tutory-backend/`
 1. `createdb snacks`
-1. `npm run setup`
+1. `npm run reboot && npm test`
